@@ -1,0 +1,466 @@
+@import "variables.scss";
+@import "mixins.scss";
+@import "global.scss";
+@import "bootstrap-overrides.scss";
+
+@font-face {
+  font-family: Khand-Medium;
+  src: url('../fonts/Khand-Medium.ttf');
+  font-display: swap;
+}
+
+// @font-face {
+//   font-family: Lato;
+//   src: url('/web/css/fonts/lato/lato-regular-webfont.woff2') format('woff2'),
+//   url('/web/css/fonts/lato/lato-regular-webfont.woff') format('woff');
+//   font-weight: 400;
+//   font-style: normal;
+
+//   font-display: swap;
+// }
+
+body {
+    color: $primary;
+    background: $white;
+    font-family: Khand-Medium;
+    h1,h2,h3,h4,h5,h6 {
+      font-family: Khand-Medium;
+    }
+}
+
+/* web fonts activated */
+html.wf-active body {
+  font-family: 'Ubuntu';
+}
+
+html.wf-active li, html.wf-active p {
+  letter-spacing: 0;
+}
+
+// Styling for the navbar
+#mainNav {
+    // border-bottom: 1px solid fade-out($gray-900, .9);
+    // background-color: $white;
+    // @include sans-serif-font;
+    // @include transition-all;
+    .navbar-brand {
+      font-weight: 700;
+      text-transform: uppercase;
+      color: $primary;
+      @include sans-serif-font;
+      &:focus,
+      &:hover {
+        color: darken($primary, .1);
+      }
+    }
+    .navbar-nav {
+      > li.nav-item {
+         > a.nav-link,
+        > a.nav-link:focus {
+          font-size: .9rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          color: $gray-900;
+          &:hover {
+            color: $primary;
+          }
+          &.active {
+            color: $gray-100 !important;
+            background-color: transparent;
+            &:hover {
+              background-color: transparent;
+            }
+          }
+        }
+      }
+    }
+    @media (min-width: 992px) {
+      border-color: transparent;
+      background-color: transparent;
+      .navbar-brand {
+        color: fade-out($white, .3);
+        &:focus,
+        &:hover {
+          color: $white;
+        }
+      }
+      .navbar-nav > li.nav-item > a.nav-link {
+        padding: 0.5rem 1rem;
+      }
+      .navbar-nav > li.nav-item > a.nav-link,
+      .navbar-nav > li.nav-item > a.nav-link:focus {
+        color: fade-out($white, .3);
+        &:hover {
+          color: $white;
+        }
+      }
+      &.navbar-shrink {
+        // border-bottom: 1px solid fade-out($gray-900, .9);
+        background-color: transparent;
+        .navbar-brand {
+          color: $white;
+          &:focus,
+          &:hover {
+            color: darken($white, .1);
+          }
+        }
+        .navbar-nav > li.nav-item > a.nav-link,
+        .navbar-nav > li.nav-item > a.nav-link:focus {
+          color: $white;
+          &:hover {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+  
+
+  // Styling for the masthead
+header.masthead {
+    padding-top: 10rem;
+    padding-bottom: calc(10rem - 56px);
+    // background-image: url('../img/header.jpeg');
+    background-color: #f19872;
+    background-position: center center;
+    // box-shadow:inset 0 0 0 2000px rgba(0,0,0,0.7);
+    @include background-cover;
+    hr {
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    p {
+      font-weight: 300;
+    }
+    @media (min-width: 768px) {
+      p {
+        font-size: 1.15rem;
+      }
+    }
+    @media (min-width: 992px) {
+      height: 75vh;
+      min-height: 650px;
+      padding-top: 0;
+      padding-bottom: 0;
+      h1 {
+        font-size: 3rem;
+      }
+    }
+    @media (min-width: 1200px) {
+      h1 {
+        font-size: 4rem;
+      }
+    }
+  }
+
+  /* ==========================================================================
+Navigation
+========================================================================== */
+.nav-toggle {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  z-index: 999999;
+  padding: 10px 35px 16px 0px;
+  cursor: pointer;
+}
+.nav-toggle:focus {
+  outline: none;
+}
+.nav-toggle span, .nav-toggle span:before, .nav-toggle span:after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 35px;
+  height: 5px;
+  border-radius: 1px;
+  background: #fff;
+  cursor: pointer;
+}
+.nav-toggle span:before {
+  top: -10px
+}
+.nav-toggle span:after {
+  bottom: -10px
+}
+.nav-toggle span, .nav-toggle span:before, .nav-toggle span:after {
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.nav-toggle.active span {
+  background-color: transparent
+}
+.nav-toggle.active span:before, .nav-toggle.active span:after {
+  top: 0
+}
+.nav-toggle.active span:before {
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.nav-toggle.active span:after {
+  top: 10px;
+  -webkit-transform: translateY(-10px) rotate(-45deg);
+  -ms-transform: translateY(-10px) rotate(-45deg);
+  transform: translateY(-10px) rotate(-45deg);
+}
+.navicon {
+  position: relative;
+  height: 26px;
+}
+.navicon p {
+  margin: 1px 50px 0 0
+}
+.navicon-fixed {
+  position: fixed;
+  top: 59px;
+  right: 143px;
+}
+
+/* ==========================================================================
+Nav Overlay
+========================================================================== */
+/* Overlay style */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(52, 82, 113, 0.95);
+}
+
+/* Menu style */
+.overlay nav {
+  position: relative;
+  top: 50%;
+  height: 60%;
+  text-align: center;
+  font-size: 54px;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.overlay ul {
+  position: relative;
+  display: inline-block;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+.overlay ul li {
+  display: block;
+  float: left;
+  margin-right: 20px;
+}
+.overlay ul li:last-child {
+  margin-right: 0px
+}
+.overlay ul li i {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 40px;
+}
+.overlay ul li a {
+  display: block;
+  padding: 50px 0;
+  min-width: 190px;
+  border: 2px solid #fff;
+  border-radius: 3px;
+  background-color: #345271;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 15px;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.overlay ul li a:hover, .overlay ul li a:focus {
+  border-color: #73d0da;
+  color: #73d0da;
+}
+
+/* Effects */
+.overlay-boxify {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity 0.5s, visibility 0s 0.5s;
+  transition: opacity 0.5s, visibility 0s 0.5s;
+}
+.overlay-boxify.open {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+.overlay-boxify nav ul li {
+  opacity: 0;
+  -webkit-transform: translate3d(0, -80px, 0);
+  transform: translate3d(0, -80px, 0);
+  -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s, opacity 0.5s;
+}
+.overlay-boxify.open nav ul:first-child li:first-child {
+  -webkit-transition-delay: 0.05s;
+  transition-delay: 0.05s;
+}
+.overlay-boxify.open nav ul:first-child li:nth-child(2) {
+  -webkit-transition-delay: 0.1s;
+  transition-delay: 0.1s;
+}
+.overlay-boxify.open nav ul:nth-child(2) li:first-child {
+  -webkit-transition-delay: 0.15s;
+  transition-delay: 0.15s;
+}
+.overlay-boxify.open nav ul:nth-child(2) li:nth-child(2) {
+  -webkit-transition-delay: 0.2s;
+  transition-delay: 0.2s;
+}
+.overlay-boxify.open nav ul li {
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+/* Gallery Section 
+==============================*/
+#tf-works{
+	padding: 80px 0;
+}
+.categories{ 
+	padding: 10px 0;
+}
+ul.cat li{
+	display: inline-block;
+}
+#tf-works li.pull-right {
+	margin-top: 10px;
+}
+ol.type li{
+	display: inline-block;
+	margin-left: 9px;
+}
+ol.type li:after{
+	// content: ' | ';
+	// margin-left: 20px;
+}
+ol.type li:last-child:after { content: ''; }
+ol.type li a{ color: #222222}
+ol.type li a.active { font-weight: 700; }
+.isotope-item { z-index: 2 }
+.isotope-hidden.isotope-item { z-index: 1 }
+.isotope,
+.isotope .isotope-item {
+    /* change duration value to whatever you like */
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+}
+.isotope-item {
+    margin-right: -1px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.isotope {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition-property: height, width;
+    -moz-transition-property: height, width;
+    transition-property: height, width;
+}
+.isotope .isotope-item {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition-property: -webkit-transform, opacity;
+    -moz-transition-property: -moz-transform, opacity;
+    transition-property: transform, opacity;
+}
+.portfolio-item{
+	margin-bottom: 30px;
+}
+.portfolio-item .hover-bg{
+	height: 260px;
+	overflow: hidden;
+	position: relative;
+}
+
+.hover-bg .hover-text {
+	position: absolute;
+	// text-align: center;
+	margin: 0 auto;
+	color: #ffffff;
+	background: rgba(0, 0, 0, 0.66);
+  padding: 25% 0;
+  padding-left: 10%;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+  transition: all 0.5s;
+}
+.hover-bg .hover-text>h4{
+	opacity: 0;
+	-webkit-transform: translateY(100%);
+            transform: translateY(100%);
+            transition: all 0.3s;
+}
+.hover-bg:hover .hover-text>h4{
+	opacity: 1;
+    -webkit-backface-visibility:hidden;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+}
+.hover-bg .hover-text>i{
+	opacity: 0;
+	-webkit-transform: translateY(0);
+            transform: translateY(0);
+            transition: all 0.3s;
+}
+.hover-bg:hover .hover-text>i{
+	opacity: 1;
+    -webkit-backface-visibility:hidden;
+   -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+}
+.hover-bg:hover .hover-text{
+	opacity: 1;
+}
+#tf-works i.fa {
+	height: 30px;
+	width: 30px;
+	// border: 1px solid #FCAC45;
+	font-size: 20px;
+	padding: 5px;
+	border-radius: 50%;
+	color: #FCAC45;
+}
+
+.viewpro {
+  display: inline-block;
+}
+
+ol.type li {
+  min-width: 41px;
+  border: 1px solid #000;
+  text-align: center;
+  border-radius: 3px;
+  padding: 0 9px;
+  /* background-color: #345271; */
+  /* color: #fff; */
+  font-weight: 400;
+  font-size: 15px;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+li.first {
+  margin-left: -5.4rem;
+}
+
+ol.type a.active li { 
+  font-weight: 700;
+  background:  #f19872;
+}
