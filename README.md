@@ -1,6 +1,6 @@
 # Bootstrap4 Sass Gulp template
 
-This is a simple Bootstrap4 Sass and Gulp template
+This is a simple Lghtbox demo and new way of font loading
 
 ## Getting Started
 
